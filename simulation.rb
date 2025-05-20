@@ -18,8 +18,6 @@ class Simulation
       end
 
       break if input.nil? || input == "EXIT"
-
-      puts input
     end
 
     puts "Exiting the simulation. Goodbye!"

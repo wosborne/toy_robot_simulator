@@ -1,9 +1,22 @@
 RSpec.describe "start.rb" do
   it "runs simulation" do
-    input = "PLACE 0,0,NORTH\nEXIT\n"
+    instructions = [
+      "PLACE 0,0,NORTH",
+      "MOVE",
+      "REPORT",
+      "PLACE 0,0,NORTH",
+      "LEFT",
+      "REPORT",
+      "PLACE 1,2,EAST",
+      "MOVE",
+      "MOVE",
+      "LEFT",
+      "MOVE",
+      "REPORT"
+    ]
 
     output = IO.popen("ruby start.rb", "r+") do |io|
-      io.puts input
+      io.puts instructions.join("\n")
       io.close_write
       io.read
     end
@@ -11,7 +24,9 @@ RSpec.describe "start.rb" do
     split_output = output.split("\n")
     expect(split_output).to eq [
       "Welcome to the Robot Simulation!",
-      "PLACE 0,0,NORTH",
+      "0,1,NORTH",
+      "0,0,WEST",
+      "3,3,NORTH",
       "Exiting the simulation. Goodbye!"
     ]
   end

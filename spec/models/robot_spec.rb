@@ -16,6 +16,7 @@ RSpec.describe Robot do
       expect(robot.y).to eq 2
       expect(robot.direction).to eq :east
     end
+  end
 
   describe "#move" do
     it "moves the robot in the current direction" do
@@ -38,6 +39,38 @@ RSpec.describe Robot do
       robot.move
       expect(robot.x).to eq 0
       expect(robot.y).to eq 0
+    end
+  end
+
+  describe "#rotate" do
+    it "rotates the robot to the left" do
+      robot = Robot.new(0, 0, :north)
+      robot.rotate(:left)
+      expect(robot.direction).to eq :west
+
+      robot.rotate(:left)
+      expect(robot.direction).to eq :south
+
+      robot.rotate(:left)
+      expect(robot.direction).to eq :east
+
+      robot.rotate(:left)
+      expect(robot.direction).to eq :north
+    end
+
+    it "rotates the robot to the right" do
+      robot = Robot.new(0, 0, :north)
+      robot.rotate(:right)
+      expect(robot.direction).to eq :east
+
+      robot.rotate(:right)
+      expect(robot.direction).to eq :south
+
+      robot.rotate(:right)
+      expect(robot.direction).to eq :west
+
+      robot.rotate(:right)
+      expect(robot.direction).to eq :north
     end
   end
 end

@@ -29,4 +29,17 @@ class Robot
     @y = y
     @direction = direction
   end
+
+  def rotate(turn)
+    current_index = DIRECTIONS.index(@direction.to_s)
+    if turn == :left
+      new_index = (current_index - 1) % DIRECTIONS.size
+    elsif turn == :right
+      new_index = (current_index + 1) % DIRECTIONS.size
+    else
+      raise ArgumentError, "Invalid turn: #{turn}"
+    end
+
+    @direction = DIRECTIONS[new_index].to_sym
+  end
 end

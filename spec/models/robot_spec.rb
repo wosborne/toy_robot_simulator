@@ -94,4 +94,16 @@ RSpec.describe Robot do
       expect(robot.direction).to be nil
     end
   end
+
+  describe "#report" do
+    it "returns the current position and direction of the robot" do
+      robot = Robot.new(1, 2, :east)
+      expect(robot.report).to eq "1,2,EAST"
+    end
+
+    it "does not report if the robot is not placed" do
+      robot = Robot.new(nil, nil, nil)
+      expect(robot.report).to be_nil
+    end
+  end
 end

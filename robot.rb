@@ -44,11 +44,17 @@ class Robot
     rotate(:right)
   end
 
+  def report
+    return unless placed?
+
+    "#{@x},#{@y},#{@direction.upcase}"
+  end
+
   private
 
   def rotate(turn)
     return unless placed?
-    
+
     current_index = DIRECTIONS.index(@direction.to_s)
     if turn == :left
       new_index = (current_index - 1) % DIRECTIONS.size

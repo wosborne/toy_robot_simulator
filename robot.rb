@@ -23,4 +23,10 @@ class Robot
       raise ArgumentError, "Invalid direction: #{@direction}"
     end
   end
+
+  def place(x, y, direction)
+    @x = x
+    @y = y
+    @direction = direction
+  end
 end

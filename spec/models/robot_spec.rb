@@ -8,6 +8,15 @@ RSpec.describe Robot do
     expect(robot.direction).to eq :north
   end
 
+  describe "#place" do
+    it "places the robot at the specified coordinates and direction" do
+      robot = Robot.new
+      robot.place(1, 2, :east)
+      expect(robot.x).to eq 1
+      expect(robot.y).to eq 2
+      expect(robot.direction).to eq :east
+    end
+
   describe "#move" do
     it "moves the robot in the current direction" do
       robot = Robot.new(0, 0, :north)

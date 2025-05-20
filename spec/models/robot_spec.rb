@@ -42,34 +42,36 @@ RSpec.describe Robot do
     end
   end
 
-  describe "#rotate" do
+  describe "#left" do
     it "rotates the robot to the left" do
       robot = Robot.new(0, 0, :north)
-      robot.rotate(:left)
+      robot.left
       expect(robot.direction).to eq :west
 
-      robot.rotate(:left)
+      robot.left
       expect(robot.direction).to eq :south
 
-      robot.rotate(:left)
+      robot.left
       expect(robot.direction).to eq :east
 
-      robot.rotate(:left)
+      robot.left
       expect(robot.direction).to eq :north
     end
+  end
 
+  describe "#right" do
     it "rotates the robot to the right" do
       robot = Robot.new(0, 0, :north)
-      robot.rotate(:right)
+      robot.right
       expect(robot.direction).to eq :east
 
-      robot.rotate(:right)
+      robot.right
       expect(robot.direction).to eq :south
 
-      robot.rotate(:right)
+      robot.right
       expect(robot.direction).to eq :west
 
-      robot.rotate(:right)
+      robot.right
       expect(robot.direction).to eq :north
     end
   end

@@ -30,6 +30,16 @@ class Robot
     @direction = direction
   end
 
+  def left
+    rotate(:left)
+  end
+
+  def right
+    rotate(:right)
+  end
+
+  private
+
   def rotate(turn)
     current_index = DIRECTIONS.index(@direction.to_s)
     if turn == :left

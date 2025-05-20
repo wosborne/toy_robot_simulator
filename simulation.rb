@@ -3,7 +3,7 @@ require './grid'
 require './robot'
 
 class Simulation
-  TIMEOUT = 10
+  TIMEOUT = 30
   GRID_SIZE = 5
 
   def initialize
@@ -49,11 +49,11 @@ class Simulation
     when "RIGHT"
       next_robot_state.right
     when "REPORT"
-      puts "#{next_robot_state.x},#{next_robot_state.y},#{next_robot_state.direction.upcase}"
+      puts "#{next_robot_state.x},#{next_robot_state.y},#{next_robot_state.direction.upcase}" if next_robot_state.placed?
     else
       puts "Invalid command. Please try again."
     end
-
-    @robot = next_robot_state if @grid.valid_position?(next_robot_state.x, next_robot_state.y)
+    
+    @robot = next_robot_state if next_robot_state.placed? && @grid.valid_position?(next_robot_state.x, next_robot_state.y)
   end
 end

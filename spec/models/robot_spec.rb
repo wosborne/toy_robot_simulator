@@ -40,6 +40,13 @@ RSpec.describe Robot do
       expect(robot.x).to eq 0
       expect(robot.y).to eq 0
     end
+
+    it "does not move if the robot is not placed" do
+      robot = Robot.new(nil, nil)
+      robot.move
+      expect(robot.x).to eq nil
+      expect(robot.y).to eq nil
+    end
   end
 
   describe "#left" do
@@ -57,6 +64,12 @@ RSpec.describe Robot do
       robot.left
       expect(robot.direction).to eq :north
     end
+
+    it "does not rotate if the robot is not placed" do
+      robot = Robot.new(nil, nil, nil)
+      robot.left
+      expect(robot.direction).to be_nil
+    end
   end
 
   describe "#right" do
@@ -73,6 +86,12 @@ RSpec.describe Robot do
 
       robot.right
       expect(robot.direction).to eq :north
+    end
+
+    it "does not rotate if the robot is not placed" do
+      robot = Robot.new(nil, nil, nil)
+      robot.right
+      expect(robot.direction).to be nil
     end
   end
 end

@@ -10,6 +10,8 @@ class Robot
   attr_accessor :x, :y, :direction
 
   def move
+    return unless placed?
+
     case @direction
     when :north
       @y += 1
@@ -30,6 +32,10 @@ class Robot
     @direction = direction
   end
 
+  def placed?
+    @x && @y && @direction
+  end
+
   def left
     rotate(:left)
   end
@@ -41,6 +47,8 @@ class Robot
   private
 
   def rotate(turn)
+    return unless placed?
+    
     current_index = DIRECTIONS.index(@direction.to_s)
     if turn == :left
       new_index = (current_index - 1) % DIRECTIONS.size

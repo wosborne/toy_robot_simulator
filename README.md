@@ -97,3 +97,9 @@ EXIT
 ```
 3,3,NORTH
 ```
+
+## Conclusion
+On reflection it would have been interesting to make this work in a similar style to the game engine Godot where the responsability of each tick is inside every object or node. So in my case the Grid would have a tick method and the Robot would have a tick method.
+To further go down that route each object could have children and can pass behaviours down to it's children. In my case again this would mean the Simulation would have a Grid child and the Grid would have a Robot child as the Robot always exists within the grid.
+Ticks would then be performed top down from parent to child and each node would be responsible for it's behaviour and limitations.
+This would move the logic of getting the users input into the Robot itself as it is the only object concerned about that procedure.

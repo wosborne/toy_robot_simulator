@@ -1,13 +1,25 @@
-class Robot
+require "./sim_node"
+
+class Robot < SimNode
   DIRECTIONS = %w[north east south west].freeze
 
-  def initialize(x = 0, y = 0, direction = :north)
+  attr_accessor :x, :y, :direction
+
+  def initialize(x = 0, y = 0, direction = :north, grid = nil)
     @x = x
     @y = y
     @direction = direction
+    @previous_state = nil
+    @grid = grid
   end
 
-  attr_accessor :x, :y, :direction
+  def tick
+    @previous_state = self.clone
+
+    perform_command(@simulation.input)
+    
+    validate_position
+  end
 
   def move
     return unless placed?
@@ -45,9 +57,7 @@ class Robot
   end
 
   def report
-    return unless placed?
-
-    "#{@x},#{@y},#{@direction.upcase}"
+    "#{@x},#{@y},#{@direction.upcase}" if placed?
   end
 
   private
@@ -65,5 +75,35 @@ class Robot
     end
 
     @direction = DIRECTIONS[new_index].to_sym
+  end
+
+  def perform_command(input)
+    command = input.split(" ")
+
+    case command[0]
+    when "PLACE"
+      arguments = command[1].split(",")
+      place(*arguments[0..1].map(&:to_i), arguments[2].downcase.to_sym)
+    when "MOVE"
+      move
+    when "LEFT"
+      left
+    when "RIGHT"
+      right
+    when "REPORT"
+      puts report if placed?
+    end
+  end
+
+  def validate_position
+    return unless placed?
+
+    fallback_position unless @grid.within_grid?(@x, @y)
+  end
+
+  def fallback_position
+    @x = @previous_state.x
+    @y = @previous_state.y
+    @direction = @previous_state.direction
   end
 end
